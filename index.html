@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Typing v1.0.3</title>
+    <meta name="description" content="様々な長さの文章でタイピングの正確さとスピードを練習するツールです。">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link href="https://unpkg.com/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --correct-color: #10b981;
+            --wrong-color: #ef4444;
+            --pending-color: #94a3b8;
+        }
+        .dark {
+            --bg-color: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --pending-color: #475569;
+        }
+    }
+
+    @layer base {
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+    }
+
+    @layer components {
+        .char-correct {
+            @apply text-[var(--correct-color)];
+        }
+        .char-wrong {
+            @apply text-[var(--wrong-color)] bg-red-100 rounded-sm;
+        }
+        .char-pending {
+            @apply text-[var(--pending-color)];
+        }
+        .char-active {
+            @apply bg-blue-100 text-[var(--text-main)] rounded-sm border-b-2 border-[var(--primary-color)];
+        }
+        
+        .btn {
+            @apply flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+        }
+        .btn-primary {
+            @apply bg-[var(--primary-color)] text-white hover:bg-[var(--primary-hover)] focus:ring-blue-500 shadow-sm;
+        }
+        .btn-secondary {
+            @apply bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-200 shadow-sm;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" src="./data/sentences.js"></script>
+    <script type="text/babel" src="./components/StatsCard.js"></script>
+    <script type="text/babel" src="./components/ResultCard.js"></script>
+    <script type="text/babel" src="./utils/romaji.js"></script>
+    <script type="text/babel" src="./utils/parser.js"></script>
+    <script type="text/babel" src="./app.js"></script>
+</body>
+</html>
